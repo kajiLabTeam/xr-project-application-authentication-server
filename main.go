@@ -14,8 +14,11 @@ func main() {
 
 	r := gin.Default()
 
+	handlers.AuthUserHandler(r)
+	handlers.CreateUserHandler(r)
+
 	handlers.AuthApplicationHandler(r)
 	handlers.RegisterApplicationHandler(r)
 
-	r.Run()
+	r.Run(":8003")
 }
