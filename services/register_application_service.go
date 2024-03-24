@@ -1,14 +1,17 @@
 package services
 
 import (
-	"github.com/kajiLabTeam/xr-project-application-authentication-server/external_services"
-	"github.com/kajiLabTeam/xr-project-application-authentication-server/external_services/databases"
+	"github.com/kajiLabTeam/xr-project-application-authentication-server/config"
+	"github.com/kajiLabTeam/xr-project-application-authentication-server/models"
 )
 
 type RegisterApplicationService struct{}
 
-func (r *RegisterApplicationService) Run(app *databases.Application, rep *databases.Representative) (*databases.Application, *databases.Representative, error) {
-	conn := external_services.DBConnection{}
+func (r *RegisterApplicationService) Run(
+	app *models.Application,
+	rep *models.Representative,
+) (*models.Application, *models.Representative, error) {
+	conn := config.DBConnection{}
 	db, err := conn.Connect()
 	if err != nil {
 		return nil, nil, err

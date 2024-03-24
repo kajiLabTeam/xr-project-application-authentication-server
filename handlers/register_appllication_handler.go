@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/kajiLabTeam/xr-project-application-authentication-server/external_services/databases"
 
+	"github.com/kajiLabTeam/xr-project-application-authentication-server/models"
 	"github.com/kajiLabTeam/xr-project-application-authentication-server/services"
 )
 
@@ -42,13 +42,13 @@ func RegisterApplicationHandler(r *gin.Engine) {
 		}
 
 		// applicationのインスタンスを生成
-		app, err := databases.NewApplication(req.ApplicationName)
+		app, err := models.NewApplication(req.ApplicationName)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 		// representativeのインスタンスを生成
-		rep, err := databases.NewRepresentative(
+		rep, err := models.NewRepresentative(
 			req.RepresentativeName,
 			req.OrganizationName,
 			req.Email,
