@@ -86,7 +86,7 @@ func CreateUserHandler(r *gin.Engine) {
 			Gender:     resUser.GetGenderOfPrivateValue(),
 			Age:        resUser.GetAgeOfPrivateValue(),
 			Height:     resUser.GetHeightOfPrivateValue(),
-			Weight:     resUser.GetHeightOfPrivateValue(),
+			Weight:     resUser.GetWeightOfPrivateValue(),
 			Occupation: resUser.GetOccupationOfPrivateValue(),
 			Address:    resUser.GetAddressOfPrivateValue(),
 		}
