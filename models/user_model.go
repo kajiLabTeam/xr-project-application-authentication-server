@@ -153,8 +153,8 @@ func (u *User) Insert(db *sql.DB) (*User, error) {
 		&insertedAge,
 		&insertedHeight,
 		&insertedWeight,
-		&insertedAddress,
 		&insertedOccupation,
+		&insertedAddress,
 		&insertedCreateAt,
 		&insertedApplicationId,
 	)
