@@ -19,7 +19,7 @@ type CreateUserRequest struct {
 	Occupation string  `json:"occupation"`
 	Address    string  `json:"address"`
 }
-
+	
 type CreateUserResponse struct {
 	Id         string  `json:"id"`
 	Name       string  `json:"name"`
@@ -56,7 +56,7 @@ func CreateUserHandler(r *gin.Engine) {
 			return
 		}
 
-		u, err := models.NewUser(
+		user, err := models.NewUser(
 			req.Name,
 			req.Email,
 			req.Gender,
@@ -74,13 +74,13 @@ func CreateUserHandler(r *gin.Engine) {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		}
 
-		resUser, err := cus.Run(u)
+		resUser, err := cus.Run(user)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		}
 
 		res := CreateUserResponse{
-			Id:         resUser.GetApplicationIdOfPrivateValue(),
+			Id:         *resUser.GetIdOfPrivateValue(),
 			Name:       resUser.GetNameOfPrivateValue(),
 			Email:      resUser.GetMailOfPrivateValue(),
 			Gender:     resUser.GetGenderOfPrivateValue(),

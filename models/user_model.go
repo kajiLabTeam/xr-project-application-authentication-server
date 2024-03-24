@@ -128,12 +128,13 @@ func (u *User) Insert(db *sql.DB) (*User, error) {
 	var insertedAge int
 	var insertedHeight float64
 	var insertedWeight float64
+	var insertedAddress string
 	var insertedOccupation string
 	var insertedCreateAt time.Time
 	var insertedApplicationId string
 
 	err := db.QueryRow(
-		"INSERT INTO users (id, name, mail, gender, age, height, weight, address, occupation, application_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id, name, mail, gender, age, height, weight, occupation, created_at, application_id",
+		"INSERT INTO users (id, name, mail, gender, age, height, weight, address, occupation, application_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id, name, mail, gender, age, height, weight, occupation, address, created_at, application_id",
 		u.id,
 		u.name,
 		u.mail,
@@ -152,6 +153,7 @@ func (u *User) Insert(db *sql.DB) (*User, error) {
 		&insertedAge,
 		&insertedHeight,
 		&insertedWeight,
+		&insertedAddress,
 		&insertedOccupation,
 		&insertedCreateAt,
 		&insertedApplicationId,
@@ -168,6 +170,7 @@ func (u *User) Insert(db *sql.DB) (*User, error) {
 		age:           insertedAge,
 		height:        insertedHeight,
 		weight:        insertedWeight,
+		address:       insertedAddress,
 		occupation:    insertedOccupation,
 		createAt:      &insertedCreateAt,
 		updateAt:      nil,
